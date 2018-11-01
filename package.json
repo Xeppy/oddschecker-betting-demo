@@ -1,0 +1,26 @@
+{
+  "name": "react-betslip-code-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "cd frontend && npm install",
+    "start-server": "npx babel ./api/server.js --out-file ./api/server-compiled.js && node ./api/server-compiled.js",
+    "start-frontend": "cd frontend && react-scripts start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.cloud.oddschecker.com:ollie.ayre/react-betslip-code-test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "babel-cli": "6.26.0",
+    "babel-preset-env": "1.7.0",
+    "nodemon": "^1.18.5"
+  }
+}
