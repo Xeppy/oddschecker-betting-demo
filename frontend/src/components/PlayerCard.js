@@ -1,52 +1,72 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+
 import Paper from '@material-ui/core/Paper';
+import Input from '@material-ui/core/Input';
+import StakeHandler from './StakeHandler';
 
 const styles = theme => ({
-  root: {
-    ...theme.mixins.gutters(),
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
   title: {
-    fontSize: 14,
+    fontSize: 22,
+    margin: 4,
+  },
+  paper: {
+    padding: theme.spacing.unit * 2,
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+    margin: theme.spacing.unit * 2,
+    background: '#ff7423'
   },
   pos: {
-    marginBottom: 12,
+    marginTop: 2,
+    marginBottom: 8,
   },
+  poundSign: {
+    paddingRight: 10,
+    fontSize: 28,
+    margin: 0,
+  },
+  flex: {
+    display: 'inline-flex'
+  },
+  input: {
+    width: 100,
+    fontSize: 28
+  },
+  Grid: {
+    minWidth: '50%'
+  }
 });
 
 function PlayerCard(props) {
   const { classes, data } = props;
 
-  console.log(data);
-
-  return data.map((player, i) => 
-    <div key={i}>
-    {player.odds.map((ind, j) => {
-      return (
-        <Paper className={classes.root} elevation={1} key={j} spacing={10}>
-          <Typography component="h3">
-            {player.name} with {ind.bookmakerCode}
-          </Typography>
-          <Typography className={classes.pos} color="textSecondary">
-            {ind.oddsDecimal}
-          </Typography>
-          <Button size="small">Learn More</Button>
-        </Paper>
-      )})}
-    </div>  
+  return (
+    <Fragment>
+    {data.map((player, i) =>
+      <Grid key={i} item className={classes.Grid}>
+        {player.odds.map((ind, j) => {
+          return (
+            <Paper className={classes.paper} key={j} >
+              <h2 className={classes.title}>
+                {player.name} at {ind.bookmakerCode}
+              </h2>
+              <h4 className={classes.pos}>
+                Odds (Decimal): {ind.oddsDecimal}
+              </h4>
+                <div className={classes.flex}>
+                  <p className={classes.poundSign}>£</p>
+                  <StakeHandler render={handleEvent => (
+                    <Input type="number" placeholder="0" className={classes.input} onKeyDown={props.validateInput} onBlur={e => handleEvent(player.name + ind.bookmakerCode, e.target.value)} />
+                    )}/>
+                </div>
+            </Paper>
+          )})}
+      </Grid>
+    )}
+  </Fragment>
   )
 }
 
