@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -39,7 +39,7 @@ const options = [
   'Show Odds which are less than 2',
 ];
 
-class SimpleListMenu extends React.Component {
+class Betslip extends Component {
   state = {
     anchorEl: null,
     loading: true,
@@ -155,8 +155,8 @@ class SimpleListMenu extends React.Component {
   }
 }
 
-SimpleListMenu.propTypes = {
+Betslip.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SimpleListMenu);
+export default withStyles(styles)(Betslip);

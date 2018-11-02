@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Betslip from './view/Betslip';
 import Receipt from './view/Receipt';
 import './App.css';
+import ErrorBoundary from './components/ErrorBoundary';
 
 class App extends Component {
   state = {
@@ -15,9 +16,11 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="App">
-        {this.state.page === 1 ? <Betslip handlePageToggle={this.handlePageToggle} /> : <Receipt handlePageToggle={this.handlePageToggle} />}
-      </div>
+      <ErrorBoundary>
+        <div className="App">
+          {this.state.page === 1 ? <Betslip handlePageToggle={this.handlePageToggle} /> : <Receipt handlePageToggle={this.handlePageToggle} />}
+        </div>
+      </ErrorBoundary>
     );
   }
 }
